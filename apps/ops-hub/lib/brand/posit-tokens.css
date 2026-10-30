@@ -1,0 +1,94 @@
+/* =====================================================================
+   POSIT BRAND TOKENS — single-file, self-contained.
+   Link this in any HTML artifact:  <link rel="stylesheet" href="assets/posit-tokens.css">
+   Values are exact, from the official Posit brand sources (ASE swatch +
+   June 2024 Brand Guidelines). Do not invent colors, type, or spacing
+   outside these tokens.
+   ===================================================================== */
+
+/* ---- Fonts (variable TTFs shipped in assets/fonts/) ---- */
+@font-face {
+  font-family: "Open Sans";
+  src: url("fonts/OpenSans.ttf") format("truetype-variations");
+  font-weight: 300 800; font-stretch: 75% 125%; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Code Pro";
+  src: url("fonts/SourceCodePro.ttf") format("truetype-variations");
+  font-weight: 200 900; font-style: normal; font-display: swap;
+}
+
+:root {
+  /* ============ CORE BRAND ============ */
+  --posit-blue:   #447099;  /* PRIMARY */
+  --posit-gray:   #404041;  /* PRIMARY */
+  --posit-orange: #EE6331;  /* SECONDARY accent — bars/eyebrows/CTAs only */
+  --white:        #FFFFFF;
+  --off-white:    #F3F6F8;
+
+  /* ============ BLUE (PRIMARY) ============ */
+  --blue-50:  #D0DBE5;  --blue-100: #A1B7CB;  --blue-200: #7394B2;
+  --blue-300: #447099;  /* Posit Blue */
+  --blue-400: #335472;  --blue-500: #22384C;  --blue-600: #111C26;
+  --blue-vibrant: #3276B5;  /* interactive hover */
+  --blue-tint:    #E5F0FC;  /* pale hover surface */
+
+  /* ============ GRAY (PRIMARY) ============ */
+  --gray-50:  #F3F6F8;  --gray-100: #CFCFCF;  --gray-200: #A0A0A0;
+  --gray-300: #717171;  /* body / caption text on white */
+  --gray-400: #404041;  /* Posit Gray */
+  --gray-500: #313131;  --gray-600: #212121;  --gray-700: #101010;
+
+  /* ============ SECONDARY (illustration / infographics ONLY — never with type) ============ */
+  --orange: #EE6331; --orange-light: #FAD8CB; --orange-light-2:#F5B197; --orange-light-3:#F08A63;
+  --orange-dark: #B14A23; --orange-dark-2:#763218; --orange-dark-3:#3B190C;
+  --teal: #419599; --teal-light:#CFE4E6; --teal-light-2:#A0CACC; --teal-dark:#317073; --teal-dark-2:#214B4D;
+  --green: #72994E; --green-light:#DBE6D3; --green-light-2:#B8CCA6; --green-dark:#55733A; --green-dark-2:#394D27;
+  --burgundy: #9A4665; --burgundy-light:#E6D0D8; --burgundy-light-2:#CCA2B2; --burgundy-dark:#73344C; --burgundy-dark-2:#4D2333;
+
+  /* ============ SEMANTIC (from Brand PDF — error/warning states) ============ */
+  --red: #D44000; --red-light:#F9A395; --red-dark:#A62103;
+  --yellow: #E7B10A; --yellow-light:#EFDEB9; --yellow-dark:#C48F0A;
+
+  /* ============ SEMANTIC ALIASES ============ */
+  --surface-page: var(--white);
+  --surface-subtle: var(--off-white);
+  --surface-inverse: var(--blue-600);      /* dark sections */
+  --surface-inverse-alt: var(--blue-500);
+  --text-primary: var(--posit-gray);       /* headlines & primary text on light */
+  --text-body: var(--gray-300);            /* body / captions on light */
+  --text-on-dark: var(--white);
+  --text-on-dark-muted: var(--blue-100);
+  --text-link: var(--blue-300);
+  --text-accent: var(--posit-orange);
+  --text-subhead: var(--blue-300);         /* Open Sans Bold sub-headlines on light */
+  --border-subtle: var(--blue-50);
+  --border-default: var(--blue-100);
+  --divider: #E2E8EE;
+  --action-primary: var(--blue-300);
+  --action-primary-hover: var(--blue-vibrant);
+  --action-primary-active: var(--blue-400);
+  --focus-ring: rgba(50,118,181,0.35);
+
+  /* ============ TYPE ============ */
+  --font-sans: "Open Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: "Source Code Pro", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --weight-light: 300; --weight-regular: 400; --weight-bold: 700;  /* NO 600 / semibold */
+  --fs-display: 72px; --fs-h1: 54px; --fs-h2: 40px; --fs-h3: 30px; --fs-h4: 24px; --fs-h5: 20px;
+  --fs-lead: 22px; --fs-body-lg: 18px; --fs-body: 16px; --fs-body-sm: 14px; --fs-caption: 12px;
+  --fs-eyebrow: 16px; --fs-eyebrow-sm: 14px;
+  --lh-display: 1.1; --lh-heading: 1.2; --lh-body: 1.6;
+  --tracking-tight: -0.01em; --tracking-eyebrow: 0.08em;
+
+  /* ============ SPACING / RADII / SHADOW ============ */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px; --space-6:24px;
+  --space-8:32px; --space-10:40px; --space-12:48px; --space-15:60px; --space-20:80px; --space-30:120px;
+  --radius-sm:4px;    /* buttons, inputs, tags */
+  --radius-lg:12px;   /* cards */
+  --radius-frame:20px;/* brand frame device — web only */
+  --radius-pill:999px;
+  --shadow-card: 0 2px 16px rgba(33,61,79,0.08);
+  --shadow-md: 0 4px 14px rgba(23,33,43,0.08);
+  --container-max:1280px;
+  --ease-out: cubic-bezier(0.16,1,0.3,1);
+}

@@ -1,0 +1,36 @@
+/* Fleet Ops Assistant styles. Brand tokens come from posit-tokens.css. */
+
+:root {
+  --bs-body-font-family: var(--font-sans);
+  --bs-body-color: var(--text-primary);
+  --bs-body-bg: var(--surface-subtle);
+  --bs-primary: var(--posit-blue);
+  --bs-primary-rgb: 68, 112, 153;
+  --bs-link-color: var(--text-link);
+  --bs-link-color-rgb: 68, 112, 153;
+  --bs-border-radius: var(--radius-sm);
+}
+
+body { font-family: var(--font-sans); color: var(--text-primary); background: var(--surface-subtle); }
+
+.topbar {
+  background: var(--surface-inverse); color: #fff; display: flex; align-items: center;
+  gap: var(--space-6); padding: var(--space-5) var(--space-8); flex: none;
+}
+.topbar .divider { width: 1px; height: 40px; background: var(--blue-400); }
+.eyebrow-dark {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow);
+  font-size: var(--fs-caption); color: var(--blue-100); margin: 0 0 4px;
+}
+.app-title {
+  font-family: var(--font-sans); font-weight: var(--weight-regular); letter-spacing: var(--tracking-tight);
+  font-size: var(--fs-h4); line-height: 1.2; margin: 0; color: #fff;
+}
+
+shiny-chat-container { margin: 0 auto; padding: var(--space-6) var(--space-4); font-size: var(--fs-body); }
+shiny-chat-message .message-content, shiny-user-message .message-content { line-height: var(--lh-body); }
+shiny-user-message .message-content { background: var(--blue-tint); color: var(--text-primary); border: 0; }
+shiny-chat-message table { font-size: var(--fs-body-sm); }
+shiny-chat-message th { font-weight: var(--weight-bold); color: var(--text-primary); }
+.suggestion { color: var(--text-link); }
+shiny-chat-input textarea { font-family: var(--font-sans); }

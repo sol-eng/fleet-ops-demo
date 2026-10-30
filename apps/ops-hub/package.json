@@ -1,0 +1,16 @@
+{
+  "name": "fleet-ops-hub",
+  "version": "1.0.0",
+  "description": "Real-time fleet dashboard and REST API for Posit Connect",
+  "main": "app.js",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}

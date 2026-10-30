@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fleet Ops MCP server</title>
+  <link rel="stylesheet" href="brand/posit-tokens.css">
+  <style>
+    body { font-family: var(--font-sans); color: var(--text-primary); background: var(--surface-subtle); margin: 0; font-size: var(--fs-body); line-height: var(--lh-body); }
+    .hero { background: var(--surface-inverse); color: #fff; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: var(--space-12) var(--space-8); }
+    .eyebrow { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: var(--tracking-eyebrow); font-size: var(--fs-eyebrow-sm); margin: 0 0 12px; color: var(--text-link); }
+    .hero .eyebrow { color: var(--posit-orange); }
+    .accent-bar { display: block; width: 40px; height: 3px; background: var(--posit-orange); margin: var(--space-6) 0 var(--space-5); }
+    h1 { font-weight: var(--weight-regular); letter-spacing: var(--tracking-tight); font-size: var(--fs-h1); line-height: var(--lh-heading); margin: 0 0 var(--space-4); }
+    .lead { color: var(--blue-100); font-size: var(--fs-lead); max-width: 56ch; margin: 0; }
+    .url { margin-top: var(--space-6); font-family: var(--font-mono); font-size: var(--fs-body); background: var(--blue-500); border-radius: var(--radius-sm); padding: var(--space-3) var(--space-4); display: inline-block; color: #fff; }
+    h2 { font-weight: var(--weight-light); letter-spacing: var(--tracking-tight); font-size: var(--fs-h3); margin: 0 0 var(--space-6); }
+    .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin-bottom: var(--space-12); }
+    .tool { background: #fff; border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); padding: var(--space-5); }
+    .tool code { font-family: var(--font-mono); color: var(--text-link); font-size: var(--fs-body-sm); }
+    .tool p { margin: var(--space-2) 0 0; color: var(--text-body); font-size: var(--fs-body-sm); }
+    .clients { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
+    .client h3 { font-weight: var(--weight-bold); font-size: var(--fs-body); color: var(--text-subhead); margin: 0 0 var(--space-2); }
+    pre { background: var(--surface-inverse); color: #E2E8EE; border-radius: var(--radius-sm); padding: var(--space-4); font-family: var(--font-mono); font-size: 13px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; margin: 0; }
+    footer { display: flex; align-items: center; gap: var(--space-4); color: var(--text-body); font-size: var(--fs-body-sm); }
+    @media (max-width: 900px) { .tools, .clients { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="wrap">
+      <img src="brand/logos/posit-horiz-white.png" alt="Posit" height="32">
+      <span class="accent-bar"></span>
+      <p class="eyebrow">MODEL CONTEXT PROTOCOL</p>
+      <h1>Fleet Ops MCP server</h1>
+      <p class="lead">A Node.js MCP server that lets any AI assistant read live fleet telemetry, search service bulletins, and open work orders. Posit Connect hosts it, signs callers in, and controls who can use it.</p>
+      <p class="url" id="mcp-url">.../mcp</p>
+    </div>
+  </section>
+  <main class="wrap">
+    <p class="eyebrow">TOOLS</p>
+    <h2>Six tools, one governed endpoint</h2>
+    <div class="tools">
+      <div class="tool"><code>fleet_summary</code><p>Machines running, idle, and in alert, plus utilization.</p></div>
+      <div class="tool"><code>find_machines</code><p>Filter the fleet by status, dealer, type, or region.</p></div>
+      <div class="tool"><code>machine_detail</code><p>Live telemetry and active alerts for one machine.</p></div>
+      <div class="tool"><code>search_service_bulletins</code><p>Find the fix, parts, and labor for a symptom or alert code.</p></div>
+      <div class="tool"><code>list_work_orders</code><p>Open and recent service work orders.</p></div>
+      <div class="tool"><code>create_work_order</code><p>Open a work order. It shows on the Ops Hub dashboard at once.</p></div>
+    </div>
+
+    <p class="eyebrow">CONNECT A CLIENT</p>
+    <h2>Use it from Python, R, or your IDE</h2>
+    <div class="clients">
+      <div class="client"><h3>Python (chatlas)</h3><pre id="py"></pre></div>
+      <div class="client"><h3>R (ellmer + mcptools)</h3><pre id="r"></pre></div>
+      <div class="client"><h3>Positron, VS Code, or Claude</h3><pre id="cfg"></pre></div>
+    </div>
+  </main>
+  <footer class="wrap"><img src="brand/logos/connect-fullcolor.png" alt="Posit Connect" height="28"><span>All data on this server is synthetic.</span></footer>
+  <script>
+    const url = new URL("mcp", location.href).href;
+    document.getElementById("mcp-url").textContent = url;
+    document.getElementById("py").textContent =
+`import os, httpx2
+from chatlas import ChatBedrockAnthropic
+
+key = os.environ["CONNECT_API_KEY"]
+http = httpx2.AsyncClient(
+    headers={"Authorization": f"Key {key}"})
+chat = ChatBedrockAnthropic()
+await chat.register_mcp_tools_http_stream_async(
+    url="${url}",
+    transport_kwargs={"http_client": http},
+)
+await chat.chat_async("Which machines need service?")`;
+    document.getElementById("r").textContent =
+`# mcp-config.json lists this server
+# via the mcp-remote bridge
+library(ellmer)
+chat <- chat_aws_bedrock()
+chat$set_tools(
+  mcptools::mcp_tools("mcp-config.json")
+)
+chat$chat("Which machines need service?")`;
+    document.getElementById("cfg").textContent =
+`{
+  "servers": {
+    "fleet-ops": {
+      "type": "http",
+      "url": "${url}",
+      "headers": {
+        "Authorization": "Key \${input:connect_key}"
+      }
+    }
+  }
+}`;
+  </script>
+</body>
+</html>

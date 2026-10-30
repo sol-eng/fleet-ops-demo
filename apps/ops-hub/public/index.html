@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fleet Ops Hub</title>
+  <link rel="stylesheet" href="brand/posit-tokens.css">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <img src="brand/logos/posit-horiz-white.png" alt="Posit" height="28">
+      <span class="divider" aria-hidden="true"></span>
+      <div>
+        <p class="eyebrow-dark">NODE.JS ON POSIT CONNECT</p>
+        <h1 class="app-title">Fleet Ops Hub</h1>
+      </div>
+      <p class="live" id="live" role="status"><span class="live-dot" aria-hidden="true"></span><span id="live-text">CONNECTING</span></p>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="kpis" aria-label="Fleet summary">
+      <div class="kpi"><p class="eyebrow">MACHINES</p><p class="kpi-value" id="k-machines">-</p></div>
+      <div class="kpi"><p class="eyebrow">RUNNING</p><p class="kpi-value" id="k-running">-</p></div>
+      <div class="kpi"><p class="eyebrow">ALERTS</p><p class="kpi-value" id="k-alerts">-</p></div>
+      <div class="kpi"><p class="eyebrow">UTILIZATION</p><p class="kpi-value" id="k-util">-</p></div>
+      <div class="kpi"><p class="eyebrow">AVG ENGINE TEMP</p><p class="kpi-value" id="k-temp">-</p></div>
+    </section>
+
+    <section class="grid">
+      <div class="card span-2">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">LIVE TELEMETRY</p>
+            <h2 class="card-title">Fleet utilization, last 2 minutes</h2>
+          </div>
+        </div>
+        <div class="chart" id="chart" role="img" aria-label="Fleet utilization percent over the last two minutes"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">WORKFLOW</p>
+            <h2 class="card-title">Work orders</h2>
+          </div>
+        </div>
+        <ol class="wo-list" id="wo-list" aria-live="polite"></ol>
+      </div>
+
+      <div class="card span-2">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">FLEET</p>
+            <h2 class="card-title">Machines</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Filter by status">
+            <button class="chip is-on" data-status="">ALL</button>
+            <button class="chip" data-status="Alert">ALERT</button>
+            <button class="chip" data-status="Running">RUNNING</button>
+            <button class="chip" data-status="Idle">IDLE</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="machines">
+            <thead><tr><th>ID</th><th>Model</th><th>Dealer</th><th>Status</th><th class="num">Engine &deg;C</th><th class="num">Hydraulic psi</th><th class="num">Fuel %</th></tr></thead>
+            <tbody id="machine-rows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <p class="eyebrow">DOCUMENT SEARCH</p>
+            <h2 class="card-title">Service bulletins</h2>
+          </div>
+        </div>
+        <form id="search" class="search">
+          <label for="q" class="sr-only">Search service bulletins</label>
+          <input id="q" name="q" placeholder="combine overheating" autocomplete="off">
+          <button class="btn-primary" type="submit">SEARCH</button>
+        </form>
+        <ol class="results" id="results"></ol>
+      </div>
+
+      <div class="card span-3 integrate">
+        <div>
+          <p class="eyebrow">USE THIS DATA ANYWHERE</p>
+          <h2 class="card-title">One API for Power BI, Power Automate, and AI assistants</h2>
+          <p class="body">We serve every number on this page from a plain REST API on the same Connect content. Connect handles sign-in and access, so a Power BI report, a Power Automate flow, or an MCP server can read it with a Connect API key.</p>
+          <ul class="endpoints" id="endpoints"></ul>
+        </div>
+        <div>
+          <p class="eyebrow">POWER QUERY (M)</p>
+          <pre class="code" id="pq"></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+  <script src="dashboard.js"></script>
+</body>
+</html>

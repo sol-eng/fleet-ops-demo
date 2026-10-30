@@ -1,0 +1,17 @@
+node_modules/
+.venv/
+__pycache__/
+*.log
+.assistant.log
+.env
+.env.*
+.DS_Store
+# Per-user deployment records (contain the server URL and content GUIDs)
+rsconnect-python/
+.posit/publish/deployments/
+# Local skill installs
+.agents/
+skills-lock.json
+# Reel build intermediates
+brag-output/work/
+.claude/
